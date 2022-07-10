@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_food/pages/foodDetail/popular_food_detail.dart';
-import 'package:flutter_food/pages/foodDetail/recomented_food_detail.dart';
-import 'package:flutter_food/pages/main/main_page.dart';
+import 'package:flutter_food/routes/route_helper.dart';
 import 'package:flutter_food/shared/size_fit.dart';
 import 'package:flutter_food/helper/depandencies.dart' as dep;
+import 'package:get/get.dart';
 
 void main() async {
   // WidgetFlutterBinding用于与 Flutter 引擎交互
@@ -19,11 +18,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MainPage(),
-      // home: PopularFoodDetail(),
-      // home: RecomentedFoodDetail(),
+      initialRoute: RouteHelper.getInitial(),
+      getPages: RouteHelper.routes,
     );
   }
 }

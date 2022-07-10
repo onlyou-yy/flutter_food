@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food/controllers/popular_product_controller.dart';
+import 'package:flutter_food/controllers/recommended_product_controller.dart';
 import 'package:flutter_food/extensions/numExtensions/num_extensions.dart';
 import 'package:flutter_food/pages/main/main_page_banner.dart';
 import 'package:flutter_food/pages/main/main_page_popular_list.dart';
@@ -12,6 +13,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.find<PopularProductController>().getPopularProductList();
+    Get.find<RecommendedProductController>().getRecommendedProductList();
     return Scaffold(
       body: SafeArea(
           child: Column(
