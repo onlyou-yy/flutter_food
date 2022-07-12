@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food/config/app_constants.dart';
 import 'package:flutter_food/controllers/popular_product_controller.dart';
 import 'package:flutter_food/extensions/numExtensions/num_extensions.dart';
 import 'package:flutter_food/mock/faker.dart';
@@ -95,7 +96,7 @@ class PopularFoodDetail extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              PopularFoodInfoCard(),
+              PopularFoodInfoCard(product),
               SizedBox(
                 height: 20.px,
               ),
@@ -149,7 +150,7 @@ class PopularFoodDetail extends StatelessWidget {
           decoration: BoxDecoration(
               image: DecorationImage(
             fit: BoxFit.cover,
-            image: NetworkImage(product.img!),
+            image: NetworkImage(AppConstants.IMG_BASE_URL + product.img!),
           )),
         ));
   }

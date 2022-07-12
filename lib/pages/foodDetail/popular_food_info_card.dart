@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food/extensions/numExtensions/num_extensions.dart';
+import 'package:flutter_food/models/products_model.dart';
 import 'package:flutter_food/shared/app_colors.dart';
 import 'package:flutter_food/widgets/big_text.dart';
 import 'package:flutter_food/widgets/icon_text.dart';
 import 'package:flutter_food/widgets/samll_text.dart';
 
 class PopularFoodInfoCard extends StatelessWidget {
-  const PopularFoodInfoCard({ Key? key }) : super(key: key);
+  final Products data;
+  const PopularFoodInfoCard(this.data,{ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class PopularFoodInfoCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BigText(text: "Chinese Side"),
+              BigText(text: data.name!),
               SizedBox(height: 10.px,),
               _buildScoreInfo(),
               SizedBox(height: 20.px,),
@@ -58,7 +60,7 @@ class PopularFoodInfoCard extends StatelessWidget {
           }),
         ),
         SizedBox(width: 10.px,),
-        SmallText(text: "4.5"),
+        SmallText(text: data.stars.toString()),
         SizedBox(width: 10.px,),
         SmallText(text: "1287 comments"),
       ],

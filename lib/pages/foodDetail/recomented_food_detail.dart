@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food/config/app_constants.dart';
 import 'package:flutter_food/controllers/recommended_product_controller.dart';
 import 'package:flutter_food/extensions/numExtensions/num_extensions.dart';
-import 'package:flutter_food/mock/faker.dart';
-import 'package:flutter_food/mock/mock_image.dart';
 import 'package:flutter_food/models/products_model.dart';
 import 'package:flutter_food/shared/app_colors.dart';
 import 'package:flutter_food/widgets/app_icon.dart';
@@ -13,13 +12,13 @@ import 'package:get/get.dart';
 
 class RecomentedFoodDetail extends StatelessWidget {
   final int pageId;
-  const RecomentedFoodDetail({Key? key, required this.pageId})
-      : super(key: key);
+  late Products recommend;
+  RecomentedFoodDetail({Key? key, required this.pageId}): super(key: key){
+    recommend = Get.find<RecommendedProductController>().recommendedProductList[pageId];
+  }
 
   @override
   Widget build(BuildContext context) {
-    Products recommend =
-        Get.find<RecommendedProductController>().recommendedProductList[pageId];
     return Scaffold(
       body: CustomScrollView(
         slivers: [_buildAppBar(), _buildContent()],
@@ -43,7 +42,7 @@ class RecomentedFoodDetail extends StatelessWidget {
                 iconColor: Colors.white,
                 bgColor: AppColors.mainColor,
               ),
-              BigText(text: "\$12.88 x 0"),
+              BigText(text: "\$${recommend.price} x 0"),
               AppIcon(
                   icon: Icons.add,
                   iconSize: 24.px,
@@ -71,7 +70,7 @@ class RecomentedFoodDetail extends StatelessWidget {
               color: AppColors.mainColor,
             ),
             child: BigText(
-              text: "\$10 | Add to cart",
+              text: "\$${recommend.price} | Add to cart",
               color: Colors.white,
             ),
           ),
@@ -87,7 +86,7 @@ class RecomentedFoodDetail extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(10.px),
             child: ExpandableTextWidget(
-              text: FakerData.ins.lorem.paragraph(sentenceCount: 80),
+              text: recommend.description!,
             ),
           ),
         ],
@@ -137,7 +136,7 @@ class RecomentedFoodDetail extends StatelessWidget {
       backgroundColor: AppColors.yellowColor,
       flexibleSpace: FlexibleSpaceBar(
         background: Image.network(
-          MockImage.imgId(3),
+          AppConstants.IMG_BASE_URL + recommend.img!,
           width: double.maxFinite,
           fit: BoxFit.cover,
         ),
